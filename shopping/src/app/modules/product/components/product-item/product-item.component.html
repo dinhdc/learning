@@ -1,0 +1,10 @@
+<div class="product-box text-center">
+  <a class="d-inline" routerLink="/products/{{ p.id }}">
+    <img class="img-responsive" src="{{ p.image }}" />
+  </a>
+  <a class="d-inline" routerLink="/products/{{ p.id }}">
+    <h1>{{ p.name }}</h1>
+  </a>
+  <div class="price">{{ p.unitPrice }} $</div>
+  <button class="btn btn-primary btn-sm">Add to cart</button>
+</div>
