@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div *ngIf="products.length > 0; else noData">
+    <div class="row">
+      <div *ngFor="let p of products" class="col-md-3">
+        <app-product-item [product]="p"></app-product-item>
+      </div>
+    </div>
+    <app-pagination></app-pagination>
+  </div>
+  <ng-template #noData>
+    <h1 class="bg-warning">No products to display</h1>
+  </ng-template>
+</div>
