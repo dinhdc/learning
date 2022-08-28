@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
 
   onFilterCategory(id: number){
     let currentFilter = this.productClient.filterProduct$.getValue();
+    currentFilter.page = 1;
     this.productClient.filterProduct$.next({...currentFilter, category: id});
   }
 

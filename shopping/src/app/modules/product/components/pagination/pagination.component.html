@@ -16,10 +16,10 @@
     </div>
     <div class="col-md-1">
       <div class="arrows">
-        <button>
+        <button (click)="previousPage()" [disabled]="!(productClient.previousPage$ | async)">
           <i class="fa fa-angle-left" aria-hidden="false"></i>
         </button>
-        <button>
+        <button (click)="nextPage()" [disabled]="!(productClient.nextPage$ | async)">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>

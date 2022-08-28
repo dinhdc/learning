@@ -29,6 +29,10 @@ export class ProductService {
     }
     return this.http.get<ProductListResponse>(`${this.baseUrl}/api/products${query}`);
   }
+
+  getProductDetail(id: number){
+    return this.http.get<IProduct>(`${this.baseUrl}/api/products/${id}`);
+  }
 }
 
 

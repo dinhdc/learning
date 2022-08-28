@@ -1,8 +1,8 @@
 <div class="cart-area">
   <a href="#">
     <div class="total">
-      $ {{totalPrice}}
-      <span> {{totalItems}}</span>
+      $ {{ (cs.cartStatus | async)?.totalPrice }}
+      <span> {{ (cs.cartStatus | async)?.totalItems }}</span>
     </div>
     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
   </a>

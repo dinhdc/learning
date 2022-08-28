@@ -8,6 +8,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     ProductComponent,
     ProductListComponent,
     ProductItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,

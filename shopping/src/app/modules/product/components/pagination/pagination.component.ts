@@ -8,7 +8,7 @@ import { ProductClientService } from 'src/app/shared/services/client/product-cli
 })
 export class PaginationComponent implements OnInit {
   optionsPerPage = [10, 20, 40, 50];
-  constructor(private productClient: ProductClientService) { }
+  constructor(public productClient: ProductClientService) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +17,16 @@ export class PaginationComponent implements OnInit {
     let perPage = Number.parseInt((event.target as HTMLSelectElement).value);
     let currentFilter = this.productClient.filterProduct$.getValue();
     this.productClient.filterProduct$.next({ ...currentFilter, perPage });
+  }
+
+  previousPage() {
+    let currentFilter = this.productClient.filterProduct$.getValue();
+    this.productClient.filterProduct$.next({ ...currentFilter, page: currentFilter.page - 1 });
+  }
+
+  nextPage() {
+    let currentFilter = this.productClient.filterProduct$.getValue();
+    this.productClient.filterProduct$.next({ ...currentFilter, page: currentFilter.page + 1 });
   }
 
 }

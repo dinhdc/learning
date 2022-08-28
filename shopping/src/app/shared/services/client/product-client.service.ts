@@ -14,6 +14,9 @@ export class ProductClientService {
     perPage: 10
   }
 
+  nextPage$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  previousPage$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   filterProduct$: BehaviorSubject<IFilterProduct> = new BehaviorSubject<IFilterProduct>(this.defaultFilter);
   constructor() { }
 
