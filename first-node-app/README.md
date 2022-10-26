@@ -48,10 +48,15 @@ res.cookie("username", "Flavio");
 This method accepts a third parameter which contains various options:
 
 ```javascript
-res.cookie('username', 'Flavio', { domain: '.flaviocopes.com', path: '/administrator', sec
-ure: true })
-res.cookie('username', 'Flavio', { expires: new Date(Date.now() + 900000), httpOnly: true
-})
+res.cookie("username", "Flavio", {
+  domain: ".flaviocopes.com",
+  path: "/administrator",
+  secure: true,
+});
+res.cookie("username", "Flavio", {
+  expires: new Date(Date.now() + 900000),
+  httpOnly: true,
+});
 ```
 
 ### Some values on options cookie
