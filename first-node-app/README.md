@@ -167,3 +167,147 @@ var app = express();
 //allow OPTIONS on all resource
 app.options("*", cors());
 ```
+
+## Templating
+
+In this example and my project, i will use Pug engine
+
+To use Pug we must first install it:
+
+```javascript
+npm install pug // using npm
+yarn add pug // using yarn
+```
+
+and when initializing the Express app, we need to set it:
+
+```javascript
+const express = require("express");
+const app = express();
+app.set("view engine", "pug");
+```
+
+We can now start writing our templates in `.pug` files.
+
+Create an about view:
+
+```javascript
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+```
+
+and the template in `views/about.pug` file:
+
+```pug
+p Hello from About Page
+```
+
+This template will create a `p` tag with the content `Hello from About Page` .
+
+You can interpolate a variable using
+
+```javascript
+app.get("/about", (req, res) => {
+  res.render("about", { name: "About" });
+});
+```
+
+```pug
+p Hello from #{name}
+```
+
+## Middleware
+
+A middleware is a function that hooks into the routing process, and performs some operation at some point, depending on what it want to do.
+
+It's added to the execution stack like this:
+
+```javascript
+app.use((req, res, next) => {
+  /* */
+});
+```
+
+This is similar to defining a route, but in addition to the Request and Response objects instances, we also have a reference to the next middleware function, which we assign to the `variable next`.
+
+One example is `cookie-parser`, which is used `req.cookies` object. You install it using to parse the cookies into the `npm install cookie-parser` and you can use it like this:
+
+```javascript
+const express = require("express");
+const app = express();
+const cookieParser = require("cookie-parser");
+app.get("/", (req, res) => res.send("Hello World!"));
+app.use(cookieParser());
+app.listen(3000, () => console.log("Server ready"));
+```
+
+You can also set a middleware function to run for specific routes only, not for all, by using it as
+the second parameter of the route definition:
+
+```javascript
+const myMiddleware = (req, res, next) => {
+  /* ... */
+  next();
+};
+app.get("/", myMiddleware, (req, res) => res.send("Hello World!"));
+```
+
+If you need to store data that's generated in a middleware to pass it down to subsequent middleware functions, or to the request handler, you can use the `Request.locals` object. It will attach that data to the current request:
+
+```javascript
+req.locals.name = "Example";
+```
+
+## Serving static files
+
+How to serve static assets directly from a folder in Express?
+
+It's common to have images, CSS and more in a `public` subfolder, and expose them to the root level:
+
+```javascript
+const express = require("express");
+const app = express();
+app.use(express.static("public"));
+/* ... */
+app.listen(3000, () => console.log("Server ready"));
+```
+
+## Send files
+
+Express provides a handy method to transfer a file as attachment: `Response.download()`
+
+The `Response.download()` method allows you to send a file attached to the request, and the browser instead of showing it in the page, it will save it to disk.
+
+```javascript
+app.get("/", (req, res) => res.download("./file.pdf"));
+```
+
+In the context of an app:
+
+```javascript
+const express = require("express");
+const app = express();
+app.get("/", (req, res) => res.download("./file.pdf"));
+app.listen(3000, () => console.log("Server ready"));
+```
+
+You can set the file to be sent with a custom filename:
+
+```javascript
+res.download("./file.pdf", "user-facing-filename.pdf");
+```
+
+This method provides a callback function which you can use to execute code once the file has
+been sent:
+
+```javascript
+res.download("./file.pdf", "user-facing-filename.pdf", (err) => {
+  if (err) {
+    //handle error
+    return;
+  } else {
+    //do something
+  }
+});
+```
