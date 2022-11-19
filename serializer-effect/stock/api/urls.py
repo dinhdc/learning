@@ -5,4 +5,5 @@ router = DefaultRouter()
 urlpatterns = []
 
 router.register(r'stock-codes', views.StockCodeViewSet, basename="Stok Code")
+router.register(r'stock-prices', views.StockPerDayViewSet, basename="Stok Price")
 urlpatterns += router.urls
