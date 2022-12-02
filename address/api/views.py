@@ -10,7 +10,7 @@ class CityViewSet(ModelViewSet):
     serializer_class = CitySerializer
     module = ["Address City"]
     http_method_names = ["get"]
-    lookup_field = "uid"
+    lookup_field = "key"
 
 
 class DistrictViewSet(ModelViewSet):
@@ -19,13 +19,13 @@ class DistrictViewSet(ModelViewSet):
     module = ["Address District"]
     model = District
     http_method_names = ["get"]
-    lookup_field = "uid"
+    lookup_field = "key"
 
     def get_queryset(self):
         if self.action == "list":
             if self.request.GET.get("parent") is not None:
                 city_id = self.request.GET.get("parent")
-                city_obj = City.objects.get(uid=city_id)
+                city_obj = City.objects.get(key=city_id)
                 queryset = self.model.objects.filter(parent_code=city_obj)
                 return queryset
         return super().get_queryset()
@@ -44,13 +44,13 @@ class WardViewSet(ModelViewSet):
     module = ["Address Ward"]
     model = Ward
     http_method_names = ["get"]
-    lookup_field = "uid"
+    lookup_field = "key"
 
     def get_queryset(self):
         if self.action == "list":
             if self.request.GET.get("parent") is not None:
                 district_id = self.request.GET.get("parent")
-                district_obj = District.objects.get(uid=district_id)
+                district_obj = District.objects.get(key=district_id)
                 queryset = self.model.objects.filter(parent_code=district_obj)
                 return queryset
         return super().get_queryset()
