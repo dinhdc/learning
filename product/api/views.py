@@ -46,6 +46,11 @@ class ProductView(ModelViewSet):
             return ProductGetSerializer
         return self.serializer_class
 
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAdminUser()]
+
 
 class ProductInventoryView(ModelViewSet):
     queryset = ProductInventory.objects.all()
