@@ -53,4 +53,3 @@ class ProductInventoryView(ModelViewSet):
     module = ["Product Inventory"]
     lookup_field = "key"
     permission_classes = [IsAdminUser]
-
