@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from user.api.api_views import *
+from user.api.api_views import UserLoginView, UserRefreshView, UserViewSet, UserAddressUpdate
 from django.urls import path
 
 urlpatterns = [

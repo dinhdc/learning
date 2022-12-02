@@ -1,5 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
-from user.api.serializers import *
+from user.api.serializers import (
+    UserAddressCreateSerializer,
+    UserAddressSerializer,
+    UserSerializer
+)
 from user.models import User, UserAddress
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import (

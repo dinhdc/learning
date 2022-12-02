@@ -1,11 +1,10 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 from user.models import User, UserAddress
-from address.models import *
+from address.models import District, Ward, City
 
 
 class TestUserAction(TestCase):
-
     base_url = "http://127.0.0.1:8000/api"
     api_client = APIClient()
     end_points = {
@@ -18,9 +17,11 @@ class TestUserAction(TestCase):
         self.user = User.objects.create_superuser("admin", "123456a@", "admin@gmail.com")
         city = City.objects.create(name="Vĩnh Phúc", slug="vinh-phuc", type="tinh",
                                    name_with_type="Tỉnh Vĩnh Phúc", code=26)
-        district = District.objects.create(name="Tam Dương", slug="tam-duong", type="huyen", name_with_type="Huyện Tam Dương",
-                                path="Tam Dương, Vĩnh Phúc", path_with_type="Huyện Tam Dương, Tỉnh Vĩnh Phúc",
-                                code=247, parent_code=city)
+        district = District.objects.create(name="Tam Dương", slug="tam-duong", type="huyen",
+                                           name_with_type="Huyện Tam Dương",
+                                           path="Tam Dương, Vĩnh Phúc",
+                                           path_with_type="Huyện Tam Dương, Tỉnh Vĩnh Phúc",
+                                           code=247, parent_code=city)
         Ward.objects.create(name="Hợp Hòa", slug="hop-hoa", type="thi-tran", name_with_type="Thị trấn Hợp Hòa",
                             path="Hợp Hòa, Tam Dương, Vĩnh Phúc",
                             path_with_type="Thị trấn Hợp Hòa, Huyện Tam Dương, Tỉnh Vĩnh Phúc",
