@@ -43,6 +43,13 @@ class TestCategoryView(TestCase):
         self.assertEqual(response.data["description"], new_category["description"])
 
     def test_update_category(self):
+        login_data = {
+            "email": "admin@gmail.com",
+            "password": "123456a@"
+        }
+        user_response = self.api_client.post("{0}/{1}".format(self.base_url, self.end_points["login"]),
+                                             data=login_data)
+        self.api_client.credentials(HTTP_AUTHORIZATION="Bearer " + user_response.data["access"])
         category = ProductCategory.objects.all().first()
         new_category = {
             "name": "category 1",
@@ -56,6 +63,13 @@ class TestCategoryView(TestCase):
         self.assertEqual(response.data["description"], new_category["description"])
 
     def test_update_fail_category_without_description(self):
+        login_data = {
+            "email": "admin@gmail.com",
+            "password": "123456a@"
+        }
+        user_response = self.api_client.post("{0}/{1}".format(self.base_url, self.end_points["login"]),
+                                             data=login_data)
+        self.api_client.credentials(HTTP_AUTHORIZATION="Bearer " + user_response.data["access"])
         category = ProductCategory.objects.all().first()
         new_category = {
             "description": "lorem abc japan china"
@@ -65,6 +79,13 @@ class TestCategoryView(TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_update_success_category_without_description(self):
+        login_data = {
+            "email": "admin@gmail.com",
+            "password": "123456a@"
+        }
+        user_response = self.api_client.post("{0}/{1}".format(self.base_url, self.end_points["login"]),
+                                             data=login_data)
+        self.api_client.credentials(HTTP_AUTHORIZATION="Bearer " + user_response.data["access"])
         category = ProductCategory.objects.all().first()
         new_category = {
             "description": "lorem abc japan china"
@@ -75,6 +96,13 @@ class TestCategoryView(TestCase):
         self.assertEqual(response.data["description"], new_category["description"])
 
     def test_delete_category(self):
+        login_data = {
+            "email": "admin@gmail.com",
+            "password": "123456a@"
+        }
+        user_response = self.api_client.post("{0}/{1}".format(self.base_url, self.end_points["login"]),
+                                             data=login_data)
+        self.api_client.credentials(HTTP_AUTHORIZATION="Bearer " + user_response.data["access"])
         new_category = {
             "name": "category 1",
             "description": "lorem abc japan china"
@@ -86,3 +114,4 @@ class TestCategoryView(TestCase):
         response = self.api_client.delete(delete_url)
         self.assertEqual(response.status_code, 204)
         self.assertGreaterEqual(ProductCategory.objects.all().count(), 0)
+        self.api_client.logout()
