@@ -59,3 +59,10 @@ class UserAddressCreateSerializer(serializers.ModelSerializer):
         user_address = UserAddress.objects.create(**validated_data)
         user_address.save()
         return user_address
+
+    def update(self, instance, validated_data):
+        instance = super(UserAddressCreateSerializer, self).update(instance, validated_data)
+        user = self.context["user"]
+        instance.user = user
+        instance.save()
+        return instance

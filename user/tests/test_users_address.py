@@ -27,7 +27,7 @@ class TestUserAction(TestCase):
                             path_with_type="Thị trấn Hợp Hòa, Huyện Tam Dương, Tỉnh Vĩnh Phúc",
                             code=8869, parent_code=district)
 
-    def test_update_address_without_token(self):
+    def test_create_address_without_token(self):
         data = {
             "addressLine": "demo",
             "phone": "021312312",
@@ -38,7 +38,7 @@ class TestUserAction(TestCase):
         response = self.api_client.post("{0}/{1}".format(self.base_url, self.end_points["post"]), data=data)
         self.assertNotEqual(response.status_code, 201)
 
-    def test_update_address_with_token(self):
+    def test_create_address_with_token(self):
         user = {
             "email": "admin@gmail.com",
             "password": "123456a@"

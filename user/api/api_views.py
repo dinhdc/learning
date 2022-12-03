@@ -43,9 +43,9 @@ class UserAddressUpdate(ModelViewSet):
     lookup_field = "key"
 
     def get_serializer_class(self):
-        if self.request.method == "GET":
+        if self.action in ["list", "retrieve"]:
             return UserAddressSerializer
-        elif self.action == "create":
+        else:
             return UserAddressCreateSerializer
 
     def get_serializer_context(self):
